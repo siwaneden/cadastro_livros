@@ -79,14 +79,7 @@ WSGI_APPLICATION = 'cadastro.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Biblioteca',
-        'USER': 'root',
-        'PASSWORD': 'Burro2121?',
-        'HOST': 'localhost',  # Ou o endereço IP do servidor MySQL
-        'PORT': '3306',  # O porto padrão para MySQL
-    }
+    'default': dj_database_url.config(default='postgres://cadastro:TzRalKtL03uzP5E5qAcOxcVx4QV1Xdnc@dpg-cpebhifsc6pc739d7a90-a:5432/cadastro_sai1')
 }
 
 
