@@ -77,6 +77,7 @@ WSGI_APPLICATION = 'cadastro.wsgi.application'
 
 DATABASES = {
     'default': {
+        
  'ENGINE': 'django.db.backends.mysql',
         'NAME': 'biblioteca',
         'USER': 'root',
