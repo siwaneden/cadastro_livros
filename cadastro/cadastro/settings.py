@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import dj_database_url
+import os 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,13 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-h79!ll-&472%(7i4b)0se95b+j6y@r4v7vrm95h8pvm#%f5-4_'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", "False").lower() == "True"
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
 
 # Application definition
 
@@ -83,7 +83,8 @@ DATABASES = {
     }
 }
 
-DATABASES ["default"] = dj_database_url.parse("postgres://cadastro_livro_render_user:FMWwwBJJszmuO9Cn5OPMTjLyZlvzVhdS@dpg-cpf6tbbtg9os73b8hcm0-a.oregon-postgres.render.com/cadastro_livro_render")
+database_url = os.environ.get("DATABASE_URL")
+DATABASES ["default"] = dj_database_url.parse(database_url)
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
