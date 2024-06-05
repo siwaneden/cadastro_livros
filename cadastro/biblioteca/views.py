@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render
 from .models import Livro
 
@@ -15,3 +16,9 @@ def pesquisar_livro(request):
     isbn = request.GET.get('isbn')
     livro = Livro.objects.filter(isbn=isbn).first()
     return render(request, 'pesquisar_livro.html', {'livro': livro})
+
+def listar_livros(request):
+    if request.method == 'GET':
+        livros = Livro.objects.all().values('titulo', 'autor', 'isbn', 'descricao')
+        livros_list = list(livros)
+        return JsonResponse(livros_list, safe=False)
