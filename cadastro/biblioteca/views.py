@@ -17,4 +17,8 @@ def pesquisar_livro(request):
     livro = Livro.objects.filter(isbn=isbn).first()
     return render(request, 'pesquisar_livro.html', {'livro': livro})
 
-
+def listar_livros(request):
+    if request.method == 'GET':
+        livros = Livro.objects.all().values('titulo', 'autor', 'isbn', 'descricao')
+        livros_list = list(livros)
+        return JsonResponse(livros_list, safe=False)    

@@ -17,9 +17,5 @@ def pesquisar_livro(request, isbn):
     else:
         return JsonResponse({'message': 'Livro não encontrado'})
     
-def listar_livros(request):
-    if request.method == 'GET':
-        livros = Livro.objects.all().values('titulo', 'autor', 'isbn', 'descricao')
-        livros_list = list(livros)
-        return JsonResponse(livros_list, safe=False)    
+
 
