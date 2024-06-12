@@ -3,7 +3,7 @@ from django.http import JsonResponse
 
 logger = logging.getLogger(__name__)
 
-def book_registration_decorator(view_func):
+def livro_decorator(view_func):
     def wrapper(request, *args, **kwargs):
         response = view_func(request, *args, **kwargs)
         if isinstance(response, JsonResponse) and response.status_code == 200:
