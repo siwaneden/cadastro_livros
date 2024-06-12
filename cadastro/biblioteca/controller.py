@@ -1,6 +1,8 @@
 from django.http import JsonResponse
 from .models import Livro
+from .decorators import livro_decorator
 
+@livro_decorator
 def cadastrar_livro(request):
     if request.method == 'POST':
         titulo = request.POST.get('titulo')
@@ -9,6 +11,7 @@ def cadastrar_livro(request):
         descricao = request.POST.get('descricao')
         livro = Livro.objects.create(titulo=titulo, autor=autor, isbn=isbn, descricao=descricao)
         return JsonResponse({'message': 'Livro cadastrado com sucesso!'})
+
 
 def pesquisar_livro(request, isbn):
     livro = Livro.objects.filter(isbn=isbn).first()
